@@ -8,8 +8,8 @@ import Lifeforms.Plant;
  */
 
 /**
+ * Consists of a collection of cells.
  * @author yogeshverma
- *
  */
 public class World {
 	
@@ -20,7 +20,7 @@ public class World {
 	private Cell[][] worldGrid;
 	
 	/**
-	 * Creates a world.
+	 * Initializes a collection of cells.
 	 * @param width
 	 * @param height
 	 */
@@ -41,7 +41,7 @@ public class World {
 				
 				/*
 				 * The world has a 15% chance to spawn a herbivore and
-				 * 20% chance to spawn a plant.
+				 * 20% chance to spawn a plant upon initialization.
 				 */
 				if (random >= 85) {
 					this.worldGrid[i][j].setResident(new Herbivore(this.worldGrid[i][j]));
@@ -53,7 +53,7 @@ public class World {
 	}
 	
 	/**
-	 * Width getter
+	 * Return the width of the world
 	 * @return width, an int
 	 */
 	public int getWidth() {

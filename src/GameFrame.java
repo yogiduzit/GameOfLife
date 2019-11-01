@@ -59,7 +59,7 @@ public class GameFrame extends JFrame {
 	}
 	
 	/**
-	 * Initialized the world.
+	 * Initializes the world.
 	 */
 	public void init() {
 		for (int i = 0; i < this.world.getHeight(); i++) {
@@ -77,7 +77,7 @@ public class GameFrame extends JFrame {
 	}
 	
 	/**
-	 * Updating the game on click.
+	 * Updates the game on click.
 	 */
 	private void update() {
 		getContentPane().removeAll();
@@ -110,7 +110,7 @@ public class GameFrame extends JFrame {
 	
 	/**
 	 * Set the appearance of the button.
-	 * @param cell
+	 * @param cell, A cell
 	 */
 	private void setButtonAppearance(Cell cell) {
 		Lifeform resident = cell.getResident();
@@ -128,11 +128,11 @@ public class GameFrame extends JFrame {
 	
 	/**
 	 * Set the orientation of the cell.
-	 * @param cell
-	 * @param y
-	 * @param x
-	 * @param width
-	 * @param height
+	 * @param cell, a Cell
+	 * @param y, the yCoordinate in grid
+	 * @param x, the xCoordinate in grid
+	 * @param width, width of the grid
+	 * @param height, height of the grid
 	 */
 	private void setButtonOrientation(Cell cell, int y, int x, int width, int height) {
 		/* Setting the dimensions */

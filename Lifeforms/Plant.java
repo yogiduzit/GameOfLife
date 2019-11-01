@@ -34,7 +34,7 @@ public class Plant extends Lifeform {
 	}
 	
 	/**
-	 * Finds the neighbours and spawns a plant if the 
+	 * Spawn a plant in a random empty neighbouring cell.
 	 * neighbours meet the conditions.
 	 */
 	public void spawn() {

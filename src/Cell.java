@@ -12,8 +12,8 @@ import Lifeforms.Lifeform;
  */
 
 /**
+ * Holds a resident.
  * @author yogeshverma
- *
  */
 public class Cell extends JPanel {
 	
@@ -28,7 +28,7 @@ public class Cell extends JPanel {
 	public int y;
 	
 	/**
-	 * Cell constructor
+	 * Constructs a cell with the given coordinates
 	 * @param worldGrid, a Cell[][]
 	 * @param x, an int
 	 * @param y, an int
@@ -40,7 +40,7 @@ public class Cell extends JPanel {
 	}
 	
 	/**
-	 * Get worldGrid.
+	 * A reference to the grid of cells.
 	 * @return
 	 */
 	public Cell[][] getWorldGrid() {
@@ -56,13 +56,17 @@ public class Cell extends JPanel {
 	}
 	
 	/**
-	 * Set the resident of the cell.
+	 * Sets the resident of the cell.
 	 * @param resident, a Lifeform
 	 */
 	public void setResident(Lifeform resident) {
 		this.resident = resident;
 	}
 	
+	/**
+	 * Checks if the cell contains a resident.
+	 * @return a boolean
+	 */
 	public boolean isOccupied() {
 		return this.resident != null;
 	}
@@ -76,6 +80,10 @@ public class Cell extends JPanel {
 		}
 	}
 	
+	/**
+	 * Returns the neighbouring cells.
+	 * @return neighbours, an ArrayList that contains neighbouring cells.
+	 */
 	public List<Cell> getNeighbours() {
 		ArrayList<Cell> neighbours = new ArrayList<Cell>();
 		

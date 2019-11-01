@@ -12,8 +12,8 @@ import src.GameFrame;
  */
 
 /**
+ * Defines an organism along with abstract methods.
  * @author yogeshverma
- *
  */
 public abstract class Lifeform {
 	
@@ -27,8 +27,9 @@ public abstract class Lifeform {
 	
 	/**
 	 * Constructs the lifeform<br>
-	 * <ul>Initializes 
-	 * <li> current cell of the </li>
+	 * <h1>Initializes</h1>
+	 * <ul>
+	 * <li> current cell that this lifeform belongs to</li>
 	 * <li> turnCount, current turnCount</li>
 	 * </ul>
 	 * @param cell
