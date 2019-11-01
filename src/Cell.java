@@ -18,7 +18,8 @@ import Lifeforms.Lifeform;
 public class Cell extends JPanel {
 	
 	/**
-	 * 
+	 * Class UID that must be contained in all children classes
+	 * of JPanel.
 	 */
 	private static final long serialVersionUID = -1095172567198019636L;
 	
@@ -89,22 +90,33 @@ public class Cell extends JPanel {
 		
 		/*
 		 * Imagine a 3x3 square outside of particular element. 
-		 * Removing all the elements that are not part of the array 
-		 * will give the required neighbours.
+		 * For the elements near the corner, their won't be any neighbours
+		 * on certain sides.
 		 */
 		for (int neighbourX = this.x - 1; neighbourX <= this.x + 1; neighbourX++) {
 			for (int neighbourY = this.y - 1; neighbourY <= this.y + 1; neighbourY++) {
+				
+				/*
+				 * Enforcing conditions to check indices will
+				 * prevent any exceptions.
+				 */
 				if (neighbourY >= 0 && neighbourX >= 0
 					&& neighbourY < this.worldGrid.length && neighbourX < this.worldGrid[0].length
 					&& !(neighbourY == y && neighbourX == x)) {
 					
 					neighbours.add(this.worldGrid[neighbourY][neighbourX]);
+					
 				}
 			}
 		}
 		return neighbours;
 	}
 	
+	/**
+	 * 
+	 * @param cells
+	 * @return
+	 */
 	public static List<Cell> getEmptyCells(List<Cell> cells) {
 		ArrayList<Cell> emptyCells = new ArrayList<Cell>();
 		
@@ -113,7 +125,7 @@ public class Cell extends JPanel {
 				emptyCells.add(cell);
 			}
 		}
-		
+		 
 		return emptyCells;
 	}
 	

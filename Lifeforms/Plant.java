@@ -11,13 +11,13 @@ import src.Cell;
  */
 
 /**
+ * A static lifeform that pollinates periodically
  * @author yogeshverma
- *
  */
 public class Plant extends Lifeform {
 	
 	/**
-	 * Creates a plant.
+	 * Constructs a plant
 	 * @param cell
 	 */
 	public Plant(final Cell cell) {
@@ -40,7 +40,7 @@ public class Plant extends Lifeform {
 	public void spawn() {
 		List<Cell> neighbours = this.currCell.getNeighbours();
 		
-		if (neighbours.size() == 0 || !canPollinate(neighbours)) {
+		if (neighbours.size() == 0 || !canPollinate(neighbours, 4, 3)) {
 			return;
 		}
 		
@@ -55,23 +55,24 @@ public class Plant extends Lifeform {
 	
 	/**
 	 * Checks if the plant can pollinate.
-	 * @param neighbours
+	 * @param neighbours, a collection of the adjacent cells
+	 * @param reqPlant, no. of plants required for pollination
+	 * @param reqEmpty, no. of empty cells required for pollination.
 	 * @return
 	 */
-	private boolean canPollinate(List<Cell> neighbours) {
+	private boolean canPollinate(List<Cell> neighbours, int reqPlant, int reqEmpty) {
 		
 		int plantCount = 0;
 		int emptyCount = 0;
 		
-		for (int i = 0; i < neighbours.size(); i++) {
-			Cell cell = neighbours.get(i);
+		for (Cell cell : neighbours) {
 			if (cell.getResident() == null) {
 				emptyCount++;
 			} else if (cell.getResident() instanceof Plant) {
 				plantCount++;
 			}
 		}
-		if (plantCount == 4 & emptyCount >= 3) {
+		if (plantCount == reqPlant & emptyCount >= reqEmpty) {
 			return true;
 		}
 		return false;

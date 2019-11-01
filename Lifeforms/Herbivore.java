@@ -68,7 +68,7 @@ public class Herbivore extends Lifeform implements Animal {
 	
 	/**
 	 * Move to a random adjacent cell.
-	 * @param neighbour, the  neighbouring cell.
+	 * @param neighbour, the neighbouring cell.
 	 */
 	private void move(Cell neighbour) {
 		Lifeform resident = this;

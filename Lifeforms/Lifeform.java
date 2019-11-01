@@ -32,7 +32,7 @@ public abstract class Lifeform {
 	 * <li> current cell that this lifeform belongs to</li>
 	 * <li> turnCount, current turnCount</li>
 	 * </ul>
-	 * @param cell
+	 * @param cell, the host cell.
 	 */
 	public Lifeform(final Cell cell) {
 		this.currCell = cell;
@@ -40,18 +40,30 @@ public abstract class Lifeform {
 
 	}
 	
-	/** Controls how a lifeform will update on click. */
+	/** 
+	 * Controls how a lifeform will update on click. 
+	 */
 	public abstract void update();
 	
-	
+	/**
+	 * Destroy lifeform.
+	 */
 	public void die() {
 		this.currCell.setResident(null);
 	}
 
+	/**
+	 * Return the color of this lifeform.
+	 * @return Color
+	 */
 	public Color getColor() {
 		return this.color;
 	}
 	
+	/**
+	 * Set the host of this lifeform.
+	 * @param cell
+	 */
 	public void setCell(Cell cell) {
 		this.currCell = cell;
 	}
