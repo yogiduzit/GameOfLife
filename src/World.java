@@ -53,7 +53,7 @@ public class World {
 	}
 	
 	/**
-	 * Return the width of the world
+	 * Return the width of the world.
 	 * @return width, an int
 	 */
 	public int getWidth() {
@@ -61,7 +61,7 @@ public class World {
 	}
 
 	/**
-	 * Height getter
+	 * Returns the height of the world.
 	 * @return height, an int
 	 */
 	public int getHeight() {
@@ -69,7 +69,7 @@ public class World {
 	}
 
 	/**
-	 * World grid getter
+	 * Returns the 2D cell array i.e the world grid. 
 	 * @return worldGrid, a Cell[][]
 	 */
 	public Cell[][] getWorldGrid() {

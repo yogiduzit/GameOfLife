@@ -82,7 +82,7 @@ public class Cell extends JPanel {
 	}
 	
 	/**
-	 * Returns the neighbouring cells.
+	 * Returns neighbouring cells.
 	 * @return neighbours, an ArrayList that contains neighbouring cells.
 	 */
 	public List<Cell> getNeighbours() {
@@ -97,7 +97,7 @@ public class Cell extends JPanel {
 			for (int neighbourY = this.y - 1; neighbourY <= this.y + 1; neighbourY++) {
 				
 				/*
-				 * Enforcing conditions to check indices will
+				 * Enforcing conditions to check indices to
 				 * prevent any exceptions.
 				 */
 				if (neighbourY >= 0 && neighbourX >= 0
@@ -113,9 +113,9 @@ public class Cell extends JPanel {
 	}
 	
 	/**
-	 * 
-	 * @param cells
-	 * @return
+	 * Filters a list of cells and returns unoccupied cells.
+	 * @param cells, a list of cells
+	 * @return unoccupied cells.
 	 */
 	public static List<Cell> getEmptyCells(List<Cell> cells) {
 		ArrayList<Cell> emptyCells = new ArrayList<Cell>();
@@ -130,7 +130,7 @@ public class Cell extends JPanel {
 	}
 	
 	/**
-	 * 
+	 * JPanel method to draw graphics
 	 */
 	public void paint(Graphics g) {
 		super.paint(g);

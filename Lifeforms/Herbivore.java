@@ -28,6 +28,7 @@ public class Herbivore extends Lifeform implements Animal {
 	 */
 	public void update() {
 		this.turnCount++;
+		
 		if (this.health == 0) {
 			this.die();
 			return;
@@ -88,6 +89,5 @@ public class Herbivore extends Lifeform implements Animal {
 		if (health < 100) {
 			this.health += 20;
 		}
-		
 	}
 }
