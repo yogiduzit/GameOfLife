@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import src.Cell;
+import src.RandomGenerator;
 
 /**
  * 
@@ -14,7 +15,7 @@ import src.Cell;
  * A static lifeform that pollinates periodically
  * @author yogeshverma
  */
-public class Plant extends Lifeform {
+public class Plant extends Lifeform implements HerbEdible, OmniEdible {
 	
 	/**
 	 * Constructs a plant
@@ -30,23 +31,24 @@ public class Plant extends Lifeform {
 	 */
 	public void update() {
 		this.turnCount++;
-		spawn();
+		this.giveBirth();
 	}
 	
 	/**
 	 * Spawn a plant in a random empty neighbouring cell.
 	 * neighbours meet the conditions.
 	 */
-	public void spawn() {
+	protected void giveBirth() {
 		List<Cell> neighbours = this.currCell.getNeighbours();
 		
-		if (neighbours.size() == 0 || !canPollinate(neighbours, 4, 3)) {
+		if (neighbours.size() == 0 || !canGiveBirth(neighbours, 2, 3, 0)) {
 			return;
 		}
 		
-		int emptyIndex = (int) Math.random() * Cell.getEmptyCells(neighbours).size();
+		List<Cell> emptyNeighbours = Cell.getEmptyCells(neighbours);
+		int emptyIndex = (int) Math.random() * emptyNeighbours.size() - 1;
 		if (emptyIndex != -1) {
-			Cell emptyCell = neighbours.get(emptyIndex);
+			Cell emptyCell = emptyNeighbours.get(emptyIndex);
 			Plant plant= new Plant(emptyCell);
 			emptyCell.setResident(plant);
 		}
@@ -60,7 +62,7 @@ public class Plant extends Lifeform {
 	 * @param reqEmpty, no. of empty cells required for pollination.
 	 * @return
 	 */
-	private boolean canPollinate(List<Cell> neighbours, int reqPlant, int reqEmpty) {
+	boolean canGiveBirth(List<Cell> neighbours, int reqLifeform, int reqEmpty, int reqFood) {
 		
 		int plantCount = 0;
 		int emptyCount = 0;
@@ -72,7 +74,7 @@ public class Plant extends Lifeform {
 				plantCount++;
 			}
 		}
-		if (plantCount == reqPlant & emptyCount >= reqEmpty) {
+		if (plantCount >= reqLifeform & emptyCount >= reqEmpty) {
 			return true;
 		}
 		return false;

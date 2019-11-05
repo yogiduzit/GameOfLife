@@ -8,14 +8,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import src.Cell;
+import src.RandomGenerator;
 
 /**
  * Defines a plant-eating lifeform
  * @author yogeshverma
  */
-public class Herbivore extends Lifeform implements Animal {
-	
-	private int health;
+public class Herbivore extends Animal implements CarnEdible, OmniEdible {
 	
 	public Herbivore(final Cell cell) {
 		super(cell);
@@ -27,7 +26,7 @@ public class Herbivore extends Lifeform implements Animal {
 	 * Update on click.
 	 */
 	public void update() {
-		this.turnCount++;
+		super.update();
 		
 		if (this.health == 0) {
 			this.die();
@@ -35,43 +34,32 @@ public class Herbivore extends Lifeform implements Animal {
 		}
 		
 		List<Cell> neighbours = this.currCell.getNeighbours();
-		List<Cell> emptyNeighbours = new ArrayList<Cell>();
+		List<Cell> filteredNeighbours = this.getMovableNeighbours(neighbours);
 		
-		/*
-		 * Filter the neighbouring cells that 
-		 * are either empty or contain a plant
-		 * as a resident.
-		 */
-		for (int i = 0; i < neighbours.size(); i++) {
-			Cell cell = neighbours.get(i);
-			if (cell.getResident() == null || 
-					!(cell.getResident() instanceof Herbivore)){
-				emptyNeighbours.add(neighbours.get(i));
-			}
-		}
-		
-		if (emptyNeighbours.size() == 0) {
+		if (filteredNeighbours.size() == 0) {
 			return;
 		}
 		
 		/*
 		 * Pick a random empty cell.
 		 */
-		int random = (int) (Math.random() * emptyNeighbours.size());
-		Cell neighbour = emptyNeighbours.get(random);
+		int random = (int) Math.random() * filteredNeighbours.size();
+		Cell neighbour = filteredNeighbours.get(random);
 		
-		if (neighbour.getResident() instanceof Plant) {
+		if (neighbour.getResident() instanceof HerbEdible) {
 			eat(neighbour);
 		} else if (neighbour.getResident() == null) {
 			move(neighbour);
 		}
+		
+		this.giveBirth();
 	}
 	
 	/**
 	 * Move to a random adjacent cell.
 	 * @param neighbour, the neighbouring cell.
 	 */
-	private void move(Cell neighbour) {
+	protected void move(Cell neighbour) {
 		Lifeform resident = this;
 		this.health -= 20;
 		
@@ -84,10 +72,64 @@ public class Herbivore extends Lifeform implements Animal {
 	/**
 	 * Eat a neighbouring plant.
 	 */
-	public void eat(Cell neighbour) {
+	protected void eat(Cell neighbour) {
 		move(neighbour);
 		if (health < 100) {
-			this.health += 20;
+			this.health = 100;
 		}
+	}
+	
+	List<Cell> getMovableNeighbours(List<Cell> cells) {
+		List<Cell> filteredNeighbours = new ArrayList<Cell>();
+		
+		/*
+		 * Filter the neighbouring cells that 
+		 * are either empty or contain a plant
+		 * as a resident.
+		 */
+		for (Cell cell : cells) {
+			if (cell.getResident() == null || cell.getResident() instanceof HerbEdible){
+				filteredNeighbours.add(cell);
+			}
+		}
+		
+		return filteredNeighbours;
+	}
+	
+	protected void giveBirth() {
+		List<Cell> neighbours = this.currCell.getNeighbours();
+		
+		if (neighbours.size() == 0 || !canGiveBirth(neighbours, 1, 2, 2)) {
+			return;
+		}
+		
+		List<Cell> emptyNeighbours = Cell.getEmptyCells(neighbours);
+		int emptyIndex = (int) Math.random() * emptyNeighbours.size();
+		if (emptyIndex != -1) {
+			Cell emptyCell = emptyNeighbours.get(emptyIndex);
+			Herbivore herbivore = new Herbivore(emptyCell);
+			emptyCell.setResident(herbivore);
+		}
+	}
+	
+	boolean canGiveBirth(List<Cell> neighbours, int reqLifeform, int reqEmpty, int reqFood) {
+		
+		int herbCount = 0;
+		int emptyCount = 0;
+		int edibleCount = 0;
+		
+		for (Cell cell : neighbours) {
+			if (cell.getResident() == null) {
+				emptyCount++;
+			} else if (cell.getResident() instanceof Herbivore) {
+				herbCount++;
+			} else if (cell.getResident() instanceof HerbEdible) {
+				edibleCount++;
+			}
+		}
+		if (herbCount >= reqLifeform && emptyCount >= reqEmpty && edibleCount >= reqFood) {
+			return true;
+		}
+		return false;
 	}
 }
