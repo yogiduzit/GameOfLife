@@ -43,12 +43,14 @@ public abstract class Lifeform {
 	/** 
 	 * Controls how a lifeform will update on click. 
 	 */
-	public abstract void update();
+	public void update() {
+		this.turnCount++;
+	}
 	
 	/**
 	 * Destroy lifeform.
 	 */
-	public void die() {
+	protected void die() {
 		this.currCell.setResident(null);
 	}
 
@@ -67,5 +69,8 @@ public abstract class Lifeform {
 	public void setCell(Cell cell) {
 		this.currCell = cell;
 	}
+	
+	abstract boolean canGiveBirth(List<Cell> cells, int reqLifeform, int reqEmpty, int reqFood);
+	abstract void giveBirth();
 	
 }
