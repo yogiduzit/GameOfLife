@@ -3,16 +3,24 @@
  */
 package Lifeforms;
 
+import java.util.List;
+
 import src.Cell;
 
 /**
  * @author yogeshverma
  *
  */
-public interface Animal {
+abstract class Animal extends Lifeform {
+	
+	public Animal(Cell cell) {
+		super(cell);
+	}
 	/**
 	 * Can eat other lifeforms.
 	 * @param neighbour, an adjacent cell
 	 */
-	void eat(Cell neighbour);
+	abstract void eat(Cell neighbour);
+	abstract void move(Cell neighbour);
+	abstract List<Cell> getMovableNeighbours(List<Cell> cells);
 }
