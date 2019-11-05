@@ -1,6 +1,8 @@
 package src;
 
+import Lifeforms.Carnivore;
 import Lifeforms.Herbivore;
+import Lifeforms.Omnivore;
 import Lifeforms.Plant;
 
 /**
@@ -38,15 +40,18 @@ public class World {
 			for (int j = 0; j < this.width; j++) {
 				this.worldGrid[i][j] = new Cell(this.worldGrid, j, i);
 				int random = (int) (Math.random() * 100);
-				
 				/*
 				 * The world has a 15% chance to spawn a herbivore and
 				 * 20% chance to spawn a plant upon initialization.
 				 */
-				if (random >= 85) {
+				if (random >= 80) {
 					this.worldGrid[i][j].setResident(new Herbivore(this.worldGrid[i][j]));
-				} else if (random >= 65) {
+				} else if (random >= 60) {
 					this.worldGrid[i][j].setResident(new Plant(this.worldGrid[i][j]));
+				} else if (random >= 50) {
+					this.worldGrid[i][j].setResident(new Carnivore(this.worldGrid[i][j]));
+				} else if (random >= 45) {
+					this.worldGrid[i][j].setResident(new Omnivore(this.worldGrid[i][j]));
 				}
 			}
 		}
