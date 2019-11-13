@@ -30,7 +30,7 @@ public final class Main
 
 
         RandomGenerator.reset();
-        world = new World(30, 30);
+        world = new World(25, 25);
         // Populates the world
         world.init();
         

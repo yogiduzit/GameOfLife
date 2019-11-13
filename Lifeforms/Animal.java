@@ -23,4 +23,5 @@ abstract class Animal extends Lifeform {
 	abstract void eat(Cell neighbour);
 	abstract void move(Cell neighbour);
 	abstract List<Cell> getMovableNeighbours(List<Cell> cells);
+	
 }

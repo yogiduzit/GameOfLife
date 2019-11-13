@@ -39,18 +39,20 @@ public class World {
 		for (int i = 0; i < this.height; i++) {
 			for (int j = 0; j < this.width; j++) {
 				this.worldGrid[i][j] = new Cell(this.worldGrid, j, i);
-				int random = (int) (Math.random() * 100);
+				int random = (int) (Math.random() * 10000);
+				
 				/*
-				 * The world has a 15% chance to spawn a herbivore and
-				 * 20% chance to spawn a plant upon initialization.
+				 * The world has a 20% chance to spawn a herbivore and
+				 * 10% chance to spawn a plant, 10% chance to spawn a carnivore
+				 * and 5% chance to spawn an omnivore upon initialization.
 				 */
-				if (random >= 80) {
+				if (random >= 8000) {
 					this.worldGrid[i][j].setResident(new Herbivore(this.worldGrid[i][j]));
-				} else if (random >= 60) {
+				} else if (random >= 6000) {
 					this.worldGrid[i][j].setResident(new Plant(this.worldGrid[i][j]));
-				} else if (random >= 50) {
+				} else if (random >= 5000) {
 					this.worldGrid[i][j].setResident(new Carnivore(this.worldGrid[i][j]));
-				} else if (random >= 45) {
+				} else if (random >= 4500) {
 					this.worldGrid[i][j].setResident(new Omnivore(this.worldGrid[i][j]));
 				}
 			}

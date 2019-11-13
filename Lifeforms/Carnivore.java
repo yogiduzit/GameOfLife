@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import src.Cell;
-import src.RandomGenerator;
 
 /**
  * @author yogeshverma
@@ -32,6 +31,8 @@ public class Carnivore extends Animal implements OmniEdible {
 			this.die();
 			return;
 		}
+		
+		this.health -= 20;
 		
 		List<Cell> neighbours = this.currCell.getNeighbours();
 		List<Cell> filteredNeighbours = this.getMovableNeighbours(neighbours);
@@ -61,7 +62,6 @@ public class Carnivore extends Animal implements OmniEdible {
 	 */
 	protected void move(Cell neighbour) {
 		Lifeform resident = this;
-		this.health -= 20;
 		
 		this.currCell.setResident(null);
 		this.setCell(neighbour);
@@ -104,7 +104,7 @@ public class Carnivore extends Animal implements OmniEdible {
 		}
 		
 		List<Cell> emptyNeighbours = Cell.getEmptyCells(neighbours);
-		int emptyIndex = (int) Math.random() * emptyNeighbours.size();
+		int emptyIndex = (int) (Math.random() * emptyNeighbours.size());
 		if (emptyIndex != -1) {
 			Cell emptyCell = emptyNeighbours.get(emptyIndex);
 			Plant plant= new Plant(emptyCell);
@@ -127,7 +127,7 @@ public class Carnivore extends Animal implements OmniEdible {
 				edibleCount++;
 			}
 		}
-		if (carnCount >= reqLifeform && emptyCount >= reqEmpty && edibleCount == reqFood) {
+		if (carnCount >= reqLifeform && emptyCount >= reqEmpty && edibleCount >= reqFood) {
 			return true;
 		}
 		return false;

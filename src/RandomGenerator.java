@@ -283,6 +283,9 @@ public final class RandomGenerator
     {
         try
         {
+        	if (max == 0) {
+        		return 0;
+        	}
             return (Math.abs(NUMBERS[next]) % max);
         }
         finally

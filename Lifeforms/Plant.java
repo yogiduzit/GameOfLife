@@ -46,7 +46,7 @@ public class Plant extends Lifeform implements HerbEdible, OmniEdible {
 		}
 		
 		List<Cell> emptyNeighbours = Cell.getEmptyCells(neighbours);
-		int emptyIndex = (int) Math.random() * emptyNeighbours.size() - 1;
+		int emptyIndex = (int) (Math.random() * emptyNeighbours.size());
 		if (emptyIndex != -1) {
 			Cell emptyCell = emptyNeighbours.get(emptyIndex);
 			Plant plant= new Plant(emptyCell);

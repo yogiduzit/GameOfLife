@@ -32,6 +32,8 @@ public class Omnivore extends Animal implements CarnEdible {
 			return;
 		}
 		
+		this.health -= 20;
+		
 		List<Cell> neighbours = this.currCell.getNeighbours();
 		List<Cell> filteredNeighbours = this.getMovableNeighbours(neighbours);
 		
@@ -49,6 +51,7 @@ public class Omnivore extends Animal implements CarnEdible {
 			eat(neighbour);
 		} else if (neighbour.getResident() == null) {
 			move(neighbour);
+
 		}
 		
 		this.giveBirth();
@@ -60,7 +63,6 @@ public class Omnivore extends Animal implements CarnEdible {
 	 */
 	protected void move(Cell neighbour) {
 		Lifeform resident = this;
-		this.health -= 20;
 		
 		this.currCell.setResident(null);
 		this.setCell(neighbour);
@@ -103,7 +105,7 @@ public class Omnivore extends Animal implements CarnEdible {
 		}
 		
 		List<Cell> emptyNeighbours = Cell.getEmptyCells(neighbours);
-		int emptyIndex = (int) Math.random() * emptyNeighbours.size();
+		int emptyIndex = (int) (Math.random() * emptyNeighbours.size());
 		if (emptyIndex != -1) {
 			Cell emptyCell = emptyNeighbours.get(emptyIndex);
 			Omnivore omni = new Omnivore(emptyCell);
@@ -126,7 +128,7 @@ public class Omnivore extends Animal implements CarnEdible {
 				edibleCount++;
 			}
 		}
-		if (carnCount >= reqLifeform && emptyCount >= reqEmpty && edibleCount == reqFood) {
+		if (carnCount >= reqLifeform && emptyCount >= reqEmpty && edibleCount >= reqFood) {
 			return true;
 		}
 		return false;

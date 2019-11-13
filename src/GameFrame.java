@@ -144,6 +144,7 @@ public class GameFrame extends JFrame {
 	 */
 	private void onClick() {
 		turnCount += 1;
+		System.out.printf("Day %d\n", turnCount);
 		this.update();
 	}
 }

@@ -33,6 +33,8 @@ public class Herbivore extends Animal implements CarnEdible, OmniEdible {
 			return;
 		}
 		
+		this.health -= 20;
+		
 		List<Cell> neighbours = this.currCell.getNeighbours();
 		List<Cell> filteredNeighbours = this.getMovableNeighbours(neighbours);
 		
@@ -43,7 +45,7 @@ public class Herbivore extends Animal implements CarnEdible, OmniEdible {
 		/*
 		 * Pick a random empty cell.
 		 */
-		int random = (int) Math.random() * filteredNeighbours.size();
+		int random = (int) (Math.random() * filteredNeighbours.size());
 		Cell neighbour = filteredNeighbours.get(random);
 		
 		if (neighbour.getResident() instanceof HerbEdible) {
@@ -61,7 +63,6 @@ public class Herbivore extends Animal implements CarnEdible, OmniEdible {
 	 */
 	protected void move(Cell neighbour) {
 		Lifeform resident = this;
-		this.health -= 20;
 		
 		this.currCell.setResident(null);
 		this.setCell(neighbour);
@@ -104,7 +105,7 @@ public class Herbivore extends Animal implements CarnEdible, OmniEdible {
 		}
 		
 		List<Cell> emptyNeighbours = Cell.getEmptyCells(neighbours);
-		int emptyIndex = (int) Math.random() * emptyNeighbours.size();
+		int emptyIndex = (int) (Math.random() * emptyNeighbours.size());
 		if (emptyIndex != -1) {
 			Cell emptyCell = emptyNeighbours.get(emptyIndex);
 			Herbivore herbivore = new Herbivore(emptyCell);
